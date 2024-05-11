@@ -1,0 +1,164 @@
+export default{
+    primary: 'rgb(19,16,34)',
+    highlight: 'rgb(89, 62, 166)',
+    black: 'black',
+    subtle: 'rgba(255,255,255,0.1)',
+    subtleHigh: 'rgba(255,255,255,0.3)',
+    subtleHigher: 'rgba(255,255,255,0.6)',
+    darkSubtle: 'rgba(0,0,0,0.6)',
+    navbar: 'rgb(59, 56, 74)',
+    text: '#EEf5db',
+    white: 'white'
+}
+
+*** brown app color scheme
+export default{
+    primary: 'rgb(19,16,34)',
+    primary2: '#fff',
+    highlight: '#784d02',
+    black: 'black',
+    subtle: 'rgba(255,255,255,0.1)',
+    subtleHigh: 'rgba(255,255,255,0.3)',
+    subtleHigher: 'rgba(255,255,255,0.6)',
+    darkSubtle: 'rgba(0,0,0,0.6)',
+    navbar: '#784d02',
+    compliment: '#281a01',
+    text: '#EEf5db',
+    white: 'white',
+    brown: '#140d00',
+    sky: '#281a01'
+}
+
+<View style={styles.container2}>
+        <AutoTypingText
+          text={`HAZTECH`}
+          charMovingTime={200}
+          delay={80}
+          style={{
+            color: Colors.text,
+            fontSize: 40,
+            textTransform: "uppercase",
+            marginTop: "80%",
+          }}
+          onComplete={() => {
+            console.log("done");
+          }}
+        />
+      </View>
+
+
+
+      ////code to fetch data from my node mcu web server and display it in my expo project
+
+      import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const App = () => {
+  const [data, setData] = useState('Loading...');
+
+  useEffect(() => {
+    // Replace 'your-nodemcu-ip' with the actual IP address of your NodeMCU
+    const nodeMCUIP = 'your-nodemcu-ip';
+
+    fetch(`http://${nodeMCUIP}/`)
+      .then(response => response.text())
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setData('Error fetching data');
+      });
+  }, []); // Empty dependency array to run the effect once on mount
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Data from NodeMCU:</Text>
+      <Text style={styles.data}>{data}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
+  data: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+export default App;
+
+import React, { useState, useEffect } from 'react';
+import MapView, { Polyline } from 'react-native-maps';
+import { View, StyleSheet } from 'react-native';
+
+const MapScreen = () => {
+  const [coordinates, setCoordinates] = useState([]);
+
+  // Simulated coordinates for demonstration
+  const initialCoordinates = [
+    { latitude: 37.7749, longitude: -122.4194 }, // San Francisco, CA
+    { latitude: 34.0522, longitude: -118.2437 }, // Los Angeles, CA
+    { latitude: 41.8781, longitude: -87.6298 },  // Chicago, IL
+  ];
+
+  useEffect(() => {
+    // Simulate updating coordinates over time
+    const interval = setInterval(() => {
+      // Add a new coordinate to the list
+      const newCoordinate = {
+        latitude: Math.random() * 20 + 30,
+        longitude: Math.random() * 40 - 120,
+      };
+
+      setCoordinates((prevCoordinates) => [...prevCoordinates, newCoordinate]);
+    }, 5000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: 37.7749,
+          longitude: -122.4194,
+          latitudeDelta: 5,
+          longitudeDelta: 5,
+        }}
+      >
+        {/* Render polyline */}
+        <Polyline
+          coordinates={coordinates}
+          strokeColor="#000" // Line color
+          strokeWidth={2}     // Line width
+        />
+      </MapView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    flex: 1,
+  },
+});
+
+export default MapScreen;
+
+
+write me the react native expo client side code to be able to turn this network on and  which includes a toggle button to turn this feature on when clicked and to turn the websocket server off when clicked again  and an email text input for the user set which email to share their location with. then once the button is clicked to turn on let it send a request to the server to turn on the web socket remove the part for user authentication for now. set it on the client side that this once the toggle button is clicked the system starts sending the user location to the web socket server created every second and it should send a 10 character long alphanumeric id to the email specified 

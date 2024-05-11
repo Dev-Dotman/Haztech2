@@ -11,20 +11,26 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+      "bundleIdentifier": "com.haztech.yourexpoapp",
+      "supportsTablet": true,
+      "config": {
+        "infoPlist": {
+          "NSLocationWhenInUseUsageDescription": "To provide a personalized experience, we use your location for geofencing. Receive relevant notifications and content based on your proximity to specific locations.",
+          "NSLocationAlwaysUsageDescription": "To enhance your experience, we use your location for geofencing. Enjoy location-based features such as receiving timely notifications and personalized content based on your proximity to specific places."
+        }
+      },
+      "android": {
+        "bundleIdentifier": "com.haztech.yourexpoapp",
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/adaptive-icon.png",
+          "backgroundColor": "#ffffff"
+        }
+      },
+      "web": {
+        "favicon": "./assets/favicon.png"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
