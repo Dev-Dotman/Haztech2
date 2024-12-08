@@ -78,7 +78,6 @@ export default function Homepage() {
     startAnimation(); // Start the animation when the component mounts
 
     return () => {
-      // Clean up the animation on unmount if needed
       bounceValue.removeAllListeners();
     };
   }, [bounceValue]);
@@ -87,7 +86,7 @@ export default function Homepage() {
     const startFadeOut = () => {
       Animated.timing(fadeAnim, {
         toValue: 0,
-        duration: 1000, // Adjust the duration as needed
+        duration: 1000, 
         easing: Easing.linear,
         useNativeDriver: false,
       }).start();
