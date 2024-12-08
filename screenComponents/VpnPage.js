@@ -105,7 +105,7 @@ function VpnPage(props) {
   const responseListener = useRef();
   LogBox.ignoreLogs([
     'Warning: Each child in a list should have a unique "key" prop.',
-  ]); // Replace '...' with the specific warning message
+  ]); 
   LogBox.ignoreLogs(["Warning: Possible Unhandled Promise Rejection (id: 5)."]);
 
   async function registerForPushNotificationsAsync() {
@@ -132,8 +132,6 @@ function VpnPage(props) {
         alert("Failed to get push token for push notification!");
         return;
       }
-      // Learn more about projectId:
-      // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
       token = (
         await Notifications.getExpoPushTokenAsync({
           projectId: "your-project-id",
